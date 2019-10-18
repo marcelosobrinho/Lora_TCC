@@ -1,0 +1,3 @@
+Lora_serial	KEYWORD1
+lr_s		KEYWORD2
+
