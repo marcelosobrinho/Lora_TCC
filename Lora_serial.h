@@ -1,6 +1,6 @@
 /*
  
- lora_serial Exemplo
+ lora_serial.h
  
  Biblioteca para controle de comunicação entre radios lora via serial 
  Autor: Tec. Marcelo F Sobrinho
@@ -16,10 +16,10 @@
 
 #include "Arduino.h"
 
-class lr_s
+class Conecta
 {
   public::
-    lr_s(int tx int rx int bit_seg);
+	  Conecta(int tx int rx int bit_seg);
     
 
   private:

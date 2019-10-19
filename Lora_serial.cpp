@@ -17,12 +17,14 @@
  
 
 
- lr_s::lr_s(int rx int tx int bit_seg)
+ Conecta::Conecta(int rx int tx int bit_seg)
  {
-  SoftwareSerial loraSerial(rx, tx);
-  loraSerial.begin(bit_seg);
+	 SoftwareSerial loraSerial(rx, tx);
+	 loraSerial.begin(bit_seg);
+
   _rx=rx;
   _tc=tx;
   _bit_seg=bit_seg;
+
 
  }
