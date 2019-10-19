@@ -19,16 +19,16 @@
 class Conecta
 {
   public::
-	  Conecta(int tx int rx int bit_seg);
+	Conecta(int rx);
+	void cx_bit(int bit_seg);
+
+
     
 
   private:
     int _tx;
-    int _rx;
-    int _bit_seg;
-   
-    
-    
+
+     
 };
 
 
