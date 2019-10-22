@@ -14,26 +14,20 @@
 #ifndef Lora_s
 #define Lora_s 
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 class Conecta
 {
-  public::
-	Conecta(int rx);
-	void cx_bit(int bit_seg);
-
-
-    
+  public:
+	Conecta(int rx, int tx);
+	void bit_seg(int seg); 
+	void pacote(String pacote); 
 
   private:
-    int _tx;
-
+    int _rx;
+	int _tx;
+	
      
 };
-
-
-
-
-
 
 #endif
