@@ -16,16 +16,18 @@
 
 #include <Arduino.h>
 
-class Conecta
+class Conexao
 {
   public:
-	Conecta(int rx, int tx);
-	void bit_seg(int seg); 
-	void pacote(String pacote); 
+	Conexao(int rx, int tx, int bit_seg);
+	void iniciar(); 
+	void quant_disp(int quant); 
+	void empacotar(String dados); 
 
   private:
     int _rx;
 	int _tx;
+	int _bit_seg;
 	
      
 };

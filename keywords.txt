@@ -1,3 +1,9 @@
 Lora_serial	KEYWORD1
-Conecta		KEYWORD2
+Conexao		KEYWORD2
+bit_seg		KEYWORD2
+empacotar	KEYWORD2
+iniciar		KEYWORD2
+quant_disp	KEYWORD2
+empacotar	KEYWORD2
+
 

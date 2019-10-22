@@ -1,24 +1,16 @@
 #include <Lora_serial.h>
-
-/*
- 
- lora_serial Exemplo
- 
- Biblioteca para controle de comunicação entre radios lora via serial 
- Autor: Tec. Marcelo F Sobrinho
- Outubro de 2019
+Conexao conexaolora(2,3,9600);
 
 
- 
- */
-
- Conecta::Conecta(int rx int tx int bit_seg ); 
 void setup() {
+conexaolora.quant_disp(10);
 
 
 }
 
 void loop() {
+ conexaolora.iniciar(); 
+ 
  
 
 }

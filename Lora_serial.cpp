@@ -1,4 +1,4 @@
-1/*
+/*
  
  lora_serial.cpp
  Biblioteca para controle de comunicação entre radios lora via serial 
@@ -10,27 +10,29 @@
  */
  #include <Arduino.h>
  #include "Lora_serial.h"
- //#include <SoftwareSerial.h>
+ #include <SoftwareSerial.h>
 
  
 
 
- Conecta::Conecta(int tx, int rx)
+ Conexao::Conexao(int tx, int rx, int  bit_seg)
  {
-	//SoftwareSerial loraSerial(tx, rx);
-	//Serial.begin(bit_seg);
-	//loraSerial.begin(bit_seg);
-
     _tx = tx;
 	_rx = rx;
-
+	_bit_seg = bit_seg;
  }
 
-void Conecta::bit_seg(int seg)
+void Conexao::iniciar()
 {
+	SoftwareSerial loraSerial(_tx, _rx);
+	loraSerial.begin(_bit_seg);
+
 }
 
-void Conecta::pacote(String pacote)
+void Conexao::quant_disp(int quant)
 {
 }
+void Conexao::empacotar(String dados)
+{
 
+}
