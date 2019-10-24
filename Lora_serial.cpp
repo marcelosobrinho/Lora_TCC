@@ -15,24 +15,35 @@
  
 
 
- Conexao::Conexao(int tx, int rx, int  bit_seg)
+Conexao::Conexao(int rx, int tx, int quant_disp, int bit_seg)
  {
-    _tx = tx;
+	
+	_tx = tx;
 	_rx = rx;
 	_bit_seg = bit_seg;
+	_quant_disp = quant_disp;
  }
 
-void Conexao::iniciar()
+void Conexao::incializar_setup()
 {
 	SoftwareSerial loraSerial(_tx, _rx);
+	//Serial.begin(_bit_seg);
 	loraSerial.begin(_bit_seg);
-
+	loraSerial.println("Sucesso!!");
 }
 
-void Conexao::quant_disp(int quant)
+void Conexao::iniciar_trans()
+{
+	
+	//Serial.println("Sucesso!!");
+	
+	//loraSerial.begin(_bit_seg);
+	
+	//delay(2000);
+}
+
+
+void Conexao::empacotar(String *Vdados)
 {
 }
-void Conexao::empacotar(String dados)
-{
 
-}

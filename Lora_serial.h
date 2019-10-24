@@ -16,18 +16,21 @@
 
 #include <Arduino.h>
 
+
 class Conexao
 {
   public:
-	Conexao(int rx, int tx, int bit_seg);
-	void iniciar(); 
-	void quant_disp(int quant); 
-	void empacotar(String dados); 
+	Conexao(int rx, int tx, int quant_disp, int bit_seg);
+	void empacotar(String *Vdados); 
+	void incializar_setup();
+
+	void iniciar_trans();
 
   private:
     int _rx;
 	int _tx;
 	int _bit_seg;
+	int _quant_disp;
 	
      
 };
