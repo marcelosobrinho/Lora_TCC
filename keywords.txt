@@ -1,10 +1,7 @@
 Lora_serial		KEYWORD1
 Conexao			KEYWORD2
-bit_seg			KEYWORD2
 empacotar		KEYWORD2
 iniciar_trans		KEYWORD2
-incializar_setup	KEYWORD2
-quant_disp		KEYWORD2
-empacotar		KEYWORD2
+
 
 
