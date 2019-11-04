@@ -22,7 +22,7 @@ class Conexao
 {
   public:
 	Conexao(int rx, int tx, int quant_disp, int bit_seg);
-	void empacotar(double dados); 
+	void empacotar(float dados); 
 	void iniciar_trans();
 
   private:

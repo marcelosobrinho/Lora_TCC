@@ -25,9 +25,9 @@ Conexao::Conexao(int rx, int tx, int quant_disp, int bit_seg)
 	
 	
  }
-void Conexao::empacotar(double dados)
+void Conexao::empacotar(float dados)
 {
-	_dados += "-"+String(dados);
+	_dados += "|"+String(dados);
 
 
 }
@@ -37,7 +37,7 @@ void Conexao::iniciar_trans()
 {
 	SoftwareSerial loraSerial(_rx, _tx);
 	loraSerial.begin(_bit_seg);
-	loraSerial.println("n1"+_dados);
+	loraSerial.println("n1|"+String(_quant_disp)+_dados);
 	_dados = "";
 	delay(2000);
 }
