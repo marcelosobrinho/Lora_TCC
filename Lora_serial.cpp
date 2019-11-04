@@ -22,28 +22,26 @@ Conexao::Conexao(int rx, int tx, int quant_disp, int bit_seg)
 	_rx = rx;
 	_bit_seg = bit_seg;
 	_quant_disp = quant_disp;
+	
+	
  }
-
-void Conexao::incializar_setup()
+void Conexao::empacotar(double dados)
 {
-	SoftwareSerial loraSerial(_tx, _rx);
-	//Serial.begin(_bit_seg);
-	loraSerial.begin(_bit_seg);
-	loraSerial.println("Sucesso!!");
+	_dados += "-"+String(dados);
+
+
 }
+
 
 void Conexao::iniciar_trans()
 {
-	
-	//Serial.println("Sucesso!!");
-	
-	//loraSerial.begin(_bit_seg);
-	
-	//delay(2000);
+	SoftwareSerial loraSerial(_rx, _tx);
+	loraSerial.begin(_bit_seg);
+	loraSerial.println("n1"+_dados);
+	_dados = "";
+	delay(2000);
 }
 
 
-void Conexao::empacotar(String *Vdados)
-{
-}
+
 
