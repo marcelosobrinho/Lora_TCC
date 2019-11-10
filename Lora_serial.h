@@ -21,7 +21,7 @@
 class Conexao
 {
   public:
-	Conexao(int rx, int tx, int quant_disp, int bit_seg);
+	Conexao(int rx, int tx, int bit_seg, int op);
 	void empacotar(float dados); 
 	void iniciar_trans();
 
@@ -29,8 +29,8 @@ class Conexao
     int _rx;
 	int _tx;
 	int _bit_seg;
-	int _quant_disp;
 	String _dados;
+	int _op;
 	
 	
      
