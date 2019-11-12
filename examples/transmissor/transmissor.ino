@@ -1,26 +1,41 @@
-#include <Lora_serial.h>
-Conexao conexaolora(2, 3, 7, 9600);
-float date_s = 10.999;
-float date_s1 = 11.145;
-float date_s2 = 10.55;
-float date_s3 = 14;
-float date_s4 = 17;
-float date_s5 = 40;
-float date_s6 = 50;
-void setup() {
+#include <SoftwareSerial.h>
+ 
 
+SoftwareSerial loraSerial(2, 3); // TX, RX
+
+String envio;
+String nomeDevice="n1";
+byte dv =10; //~quantidade de dipositivos
+float sensores[10]; // vetor sensores
+byte i;
+
+void setup() {
+  Serial.begin(9600);
+  loraSerial.begin(9600);
+   
 }
 
 void loop() {
-  conexaolora.empacotar(date_s);
-  conexaolora.empacotar(date_s1);
-  conexaolora.empacotar(date_s2);
-  conexaolora.empacotar(date_s3);
-  conexaolora.empacotar(date_s4);
-  conexaolora.empacotar(date_s5);
-  conexaolora.empacotar(date_s6);
-  conexaolora.iniciar_trans();
 
+   
+ //Ja coletou todos dados dos sensores 
+  Serial.println(dv);
+  for (i=0; i<dv; i++){
+    sensores[i]=float(i);
+  }
 
+ 
+//Montagem da String
+ envio="";
+  for (i=0; i<dv; i++){
+    //Serial.println(String(sensores[i])+'-');
+    envio=envio+String(sensores[i])+'-';
+  }
+//  Serial.println("Deu Certo"+envio);
 
+ 
+// Metodo de envio 
+ loraSerial.print("Pilha ->");
+ loraSerial.println(nomeDevice+'-'+envio);
+ delay(2000);
 }

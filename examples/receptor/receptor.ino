@@ -1,14 +1,33 @@
-#include <Lora_serial.h>
-Conexao conexaolora(2, 3, 9600,2);
+#include <SoftwareSerial.h>
+ 
 
+ 
+SoftwareSerial loraSerial(2, 3); // TX, RX
+ 
 void setup() {
 
-  
+  Serial.begin(9600);
+  loraSerial.begin(9600);  
 }
+ 
+void loop() { 
+  
+  if(loraSerial.available() > 0){
+    Serial.print("recebendo...");
+    delay(100);
+    Serial.print("......");
+    delay(100);
+    Serial.print("............");
+    delay(100);
+    Serial.println("....................ok");
+    delay(50);
+    String input = loraSerial.readString();
+    Serial.println(input);  
+  
 
-void loop() {
-
-conexaolora.iniciar_recep();
-
-
+  }else{
+    Serial.println("FALHA!!");
+     delay(50);
+  }
+ 
 }
