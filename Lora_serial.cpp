@@ -46,6 +46,35 @@ void Conexao::iniciar_trans()
 	delay(2000);
 }
 
+void Conexao::iniciar_recep()
+{
+	SoftwareSerial loraSerial(2, 3);
+	loraSerial.begin(9600);
+	
+
+	//loraSerial.println("n1|"+_dados);
+	if (loraSerial.available() > 0) {
+		Serial.print("recebendo...");
+		delay(100);
+		Serial.print("......");
+		delay(100);
+		Serial.print("............");
+		delay(100);
+		Serial.println("....................ok");
+		delay(50);
+		String input = loraSerial.readString();
+		Serial.begin(4800);
+		Serial.println(input);
+	}
+	else {
+		Serial.begin(4800);
+		Serial.println("FALHA!!");
+		delay(50);
+	}
+
+
+}
+
 
 
 

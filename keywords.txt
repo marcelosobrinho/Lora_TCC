@@ -2,6 +2,6 @@ Lora_serial		KEYWORD1
 Conexao			KEYWORD2
 empacotar		KEYWORD2
 iniciar_trans		KEYWORD2
-
+iniciar_recep		KEYWORD2
 
 

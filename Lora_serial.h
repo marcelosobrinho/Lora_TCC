@@ -24,6 +24,7 @@ class Conexao
 	Conexao(int rx, int tx, int bit_seg, int op);
 	void empacotar(float dados); 
 	void iniciar_trans();
+	void iniciar_recep();
 
   private:
     int _rx;
