@@ -3,5 +3,6 @@ Conexao			KEYWORD2
 empacotar		KEYWORD2
 iniciar_trans		KEYWORD2
 iniciar_recep		KEYWORD2
+iniciar_setup		KEYWORD2
 
 

@@ -15,6 +15,8 @@
 #define Lora_s 
 
 #include <Arduino.h>
+#include <SoftwareSerial.h>
+
 
 
 
@@ -24,7 +26,8 @@ class Conexao
 	Conexao(int rx, int tx, int bit_seg, int op);
 	void empacotar(float dados); 
 	void iniciar_trans();
-	void iniciar_recep();
+	void iniciar_setup();
+	String iniciar_recep();
 
   private:
     int _rx;
@@ -32,7 +35,8 @@ class Conexao
 	int _bit_seg;
 	String _dados;
 	int _op;
-	
+	int _valid=1;
+	SoftwareSerial *loraSerial;
 	
      
 };

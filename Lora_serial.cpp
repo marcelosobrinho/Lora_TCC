@@ -10,7 +10,7 @@
  */
  #include <Arduino.h>
  #include "Lora_serial.h"
- #include <SoftwareSerial.h>
+
 
  
 
@@ -22,11 +22,13 @@ Conexao::Conexao(int rx, int tx, int bit_seg,int op )
 	_rx = rx;
 	_bit_seg = bit_seg;
 	_op = op;
+	SoftwareSerial loraSerial(_rx, _tx);
+	loraSerial.begin(_bit_seg);
 	
  }
 void Conexao::empacotar(float dados)
 {
-	if (_op==1) {
+	if (_op==2) {
 		_dados += String(dados);
 	}
 	else if (_op==2) {
@@ -46,35 +48,43 @@ void Conexao::iniciar_trans()
 	delay(2000);
 }
 
-void Conexao::iniciar_recep()
+void Conexao::iniciar_setup()
 {
-	SoftwareSerial loraSerial(2, 3);
-	loraSerial.begin(9600);
+	loraSerial = new SoftwareSerial(_rx,_tx);
+	loraSerial->begin(_bit_seg);
+}
+
+String Conexao::iniciar_recep()
+{
+	
+	
+	Serial.begin(9600);
+	Serial.print("recebendo...");
+	delay(100);
+	Serial.print("......");
+	delay(100);
+	Serial.print("............");
+	delay(100);
+	Serial.println("....................ok");
+	delay(50);
+	Serial.println(loraSerial->readString());
+
+	
+	
+	if (loraSerial->available() > 0) {
 	
 
-	//loraSerial.println("n1|"+_dados);
-	if (loraSerial.available() > 0) {
-		Serial.print("recebendo...");
-		delay(100);
-		Serial.print("......");
-		delay(100);
-		Serial.print("............");
-		delay(100);
-		Serial.println("....................ok");
-		delay(50);
-		String input = loraSerial.readString();
-		Serial.begin(4800);
-		Serial.println(input);
 	}
 	else {
-		Serial.begin(4800);
 		Serial.println("FALHA!!");
 		delay(50);
 	}
 
 
-}
 
+
+	}
+	
 
 
 
