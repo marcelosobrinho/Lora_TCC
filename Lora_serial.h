@@ -27,7 +27,7 @@ class Conexao
 	void empacotar(float dados); 
 	void iniciar_trans();
 	void iniciar_setup();
-	String iniciar_recep();
+	void iniciar_recep();
 
   private:
     int _rx;

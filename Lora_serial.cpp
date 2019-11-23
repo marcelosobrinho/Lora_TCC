@@ -54,25 +54,27 @@ void Conexao::iniciar_setup()
 	loraSerial->begin(_bit_seg);
 }
 
-String Conexao::iniciar_recep()
+void Conexao::iniciar_recep()
 {
 	
 	
-	Serial.begin(9600);
-	Serial.print("recebendo...");
-	delay(100);
-	Serial.print("......");
-	delay(100);
-	Serial.print("............");
-	delay(100);
-	Serial.println("....................ok");
-	delay(50);
-	Serial.println(loraSerial->readString());
-
 	
 	
+	Serial.begin(19200);
 	if (loraSerial->available() > 0) {
 	
+
+		Serial.print("recebendo...");
+		delay(100);
+		Serial.print("......");
+		delay(100);
+		Serial.print("............");
+		delay(100);
+		Serial.println("....................ok");
+		delay(50);
+		String input = String(loraSerial->readString());
+
+		Serial.println(input);
 
 	}
 	else {
