@@ -43,10 +43,6 @@ void Conexao::iniciar_setup()
 	loraSerial->begin(_bit_seg);
 }
 
-
-
-
-
 void Conexao::iniciar_trans()
 {
 	loraSerial->println("n1|"+_dados);
@@ -66,6 +62,11 @@ String Conexao::iniciar_recep()
 	}
 	return input;
 	}
+
+void Conexao::iniciar_grav_arq(String dados)
+{
+ 
+}
 	
 
 

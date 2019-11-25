@@ -28,6 +28,7 @@ class Conexao
 	void iniciar_trans();
 	void iniciar_setup();
 	String iniciar_recep();
+	void  iniciar_grav_arq(String dados);
 
   private:
     int _rx;
@@ -35,7 +36,6 @@ class Conexao
 	int _bit_seg;
 	String _dados;
 	int _op;
-	int _valid=1;
 	SoftwareSerial *loraSerial;
 	
      
