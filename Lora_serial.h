@@ -16,6 +16,8 @@
 
 #include <Arduino.h>
 #include <SoftwareSerial.h>
+#include <SPI.h>
+#include <SD.h>
 
 
 
@@ -37,6 +39,7 @@ class Conexao
 	String _dados;
 	int _op;
 	SoftwareSerial *loraSerial;
+	File *arq;
 	
      
 };
