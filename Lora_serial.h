@@ -31,6 +31,7 @@ class Conexao
 	void iniciar_setup();
 	String iniciar_recep();
 	void  iniciar_grav_arq(String dados);
+	//
 
   private:
     int _rx;
