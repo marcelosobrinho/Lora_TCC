@@ -56,10 +56,19 @@ void Conexao::iniciar_trans()
 String Conexao::iniciar_recep()
 {
 	String input = "";
+	
 	if (loraSerial->available() > 0) {
 		input = loraSerial->readString();
+		String nomedesp ="";
 		Serial.println("Sinal recebido OK!");
-		this->iniciar_grav_arq(input);
+		nomedesp += input.charAt(0);
+		nomedesp += input.charAt(1);
+		Serial.println(nomedesp);
+		delay(200);
+		if (nomedesp == "n1") {
+			this->iniciar_grav_arq(input);
+		}
+		
 	}
 	else {
 		Serial.println("Sem sinal do radio!");
@@ -76,7 +85,7 @@ void Conexao::iniciar_grav_arq(String dados)
 	File arq;
 	if (!SD.begin(4)) {
 		Serial.println("Cartão desconectado!");
-		Serial.println("Reniciar Arduino!");
+		Serial.println("Reiniciar Arduino!");
 		while (1);
 	}
 	arq = SD.open("datalog.txt", FILE_WRITE);
