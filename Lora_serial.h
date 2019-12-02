@@ -37,12 +37,12 @@ class Conexao
     int _rx;
 	int _tx;
 	int _bit_seg;
-	String _dados;
+	String _dadosT;
+	String _dadosR;
 	int _op;
 	SoftwareSerial *loraSerial;
-	File *arq;
-	
-     
+	//File *arqLog;
+	     
 };
 
 #endif
