@@ -41,6 +41,7 @@ class Conexao
 	String _dadosR;
 	int _op;
 	SoftwareSerial *loraSerial;
+	String _nomeDev;
 	//File *arqLog;
 	     
 };

@@ -59,14 +59,18 @@ String Conexao::iniciar_recep()
 	
 	if (loraSerial->available() > 0) {
 		input = loraSerial->readString();
-		String nomedesp ="";
+		_nomeDev ="";
+		_nomeDev = String(input.charAt(0)) + String(input.charAt(1));
+		delay(50);
 		Serial.println("Sinal recebido OK!");
-		nomedesp += input.charAt(0);
-		nomedesp += input.charAt(1);
-		Serial.println(nomedesp);
-		delay(200);
-		if (nomedesp == "n1") {
+		delay(50);
+		Serial.println(_nomeDev);
+		if (_nomeDev == "n1") {
 			this->iniciar_grav_arq(input);
+		}
+		else {
+			Serial.println("Conexão Negada para - > "+_nomeDev);
+			delay(50);
 		}
 		
 	}
@@ -83,10 +87,10 @@ void Conexao::iniciar_grav_arq(String dados)
 {
 	Serial.begin(9600);
 	File arq;
-	if (!SD.begin(4)) {
+	while (!SD.begin(4)) {
 		Serial.println("Cartão desconectado!");
-		Serial.println("Reiniciar Arduino!");
-		while (1);
+		//Serial.println("Reiniciar Arduino!");
+		//while (1);
 	}
 	arq = SD.open("datalog.txt", FILE_WRITE);
 	if (arq) {
