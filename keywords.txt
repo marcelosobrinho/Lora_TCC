@@ -1,7 +1,8 @@
 Lora_serial		KEYWORD1
 Conexao			KEYWORD2
 empacotar		KEYWORD2
-iniciar_trans		KEYWORD2
+transmissor_s_conf	KEYWORD2
+transmissor_c_conf	KEYWORD2
 iniciar_recep		KEYWORD2
 iniciar_setup		KEYWORD2
 iniciar_grav_arq	KEYWORD2

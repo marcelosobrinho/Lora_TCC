@@ -14,13 +14,13 @@ conexaolora.iniciar_setup();
 
 void loop() {
 
-  conexaolora.empacotar(date_s1);
-  conexaolora.empacotar(date_s2);
-  conexaolora.empacotar(date_s3);
-  conexaolora.empacotar(date_s4);
-  conexaolora.empacotar(date_s5);
-  conexaolora.empacotar(date_s6);
-  conexaolora.iniciar_trans();
+  conexaolora.empacotar(String(date_s1),2);
+  conexaolora.empacotar(String(date_s2),2);
+  conexaolora.empacotar(String(date_s3),2);
+  conexaolora.empacotar(String(date_s4),2);
+  conexaolora.empacotar(String(date_s5),2);
+  conexaolora.empacotar(String(date_s6),2);
+  conexaolora.transmissor_c_conf();
 
 
 

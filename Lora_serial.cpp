@@ -27,12 +27,12 @@ Conexao::Conexao(int rx, int tx, int bit_seg,int op )
 	_op = op;
 
  }
-void Conexao::empacotar(float dados)
+void Conexao::empacotar(String dados, int op )
 {
-	if (_op==1) {
+	if (op==1) {
 		_dadosT += String(dados);
 	}
-	else if (_op==2) {
+	else if (op==2) {
 		_dadosT += "|" + String(dados);
 	}
 	
@@ -40,17 +40,68 @@ void Conexao::empacotar(float dados)
 }
 
 
+
 void Conexao::iniciar_setup()
 {
 	loraSerial = new SoftwareSerial(_rx, _tx);
 	loraSerial->begin(_bit_seg);
+	Serial.begin(9600);
 }
 
-void Conexao::iniciar_trans()
+void Conexao::transmissor_c_conf()
 {
-	loraSerial->println("n1|"+_dadosT);
+	loraSerial->println("n1|" + _dadosT);
 	_dadosT = "";
 	delay(2000);
+	this->aguardar_conf_recep();
+
+
+
+}
+
+void Conexao::transmissor_s_conf()
+{
+	loraSerial->println("n1|" + _dadosT);
+	_dadosT = "";
+	delay(2000);
+
+}
+
+String Conexao::aguardar_conf_recep()
+{
+	String input = "";
+	if (loraSerial->available() > 0) {
+//		for (int i = 0; i < 20; i++) {
+			Serial.println("LENDO");
+			input = loraSerial->readString();
+			Serial.println(input);
+		
+		
+		
+		_nomeDev = "";
+		//_nomeDev = "n1|ok";
+		//_nomeDev = String(input.charAt(0))+ String(input.charAt(1)) + String(input.charAt(2)) + String(input.charAt(3)) + String(input.charAt(4));
+		for (int i = 0; i < 5; i++) {
+			_nomeDev += String(input.charAt(i));
+		}
+		Serial.println(_nomeDev);
+		delay(50);
+		if (_nomeDev == "n1|ok") {
+			Serial.println("CONFIRMADO, AGUARDANDO PROXIMO ENVIO EM 5 MINUTOS");
+			delay(5000);
+
+		}
+		else {
+			Serial.println("RETRANSTINDO");
+			delay(50);
+			this->transmissor_c_conf();
+		}
+
+		delay(50);
+
+
+	}
+	return "";
 }
 
 String Conexao::iniciar_recep()
@@ -67,6 +118,8 @@ String Conexao::iniciar_recep()
 		Serial.println(_nomeDev);
 		if (_nomeDev == "n1") {
 			this->iniciar_grav_arq(input);
+			this->empacotar("ok", 1);
+			this->transmissor_s_conf();
 		}
 		else {
 			Serial.println("Conexão Negada para - > "+_nomeDev);

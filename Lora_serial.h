@@ -26,9 +26,11 @@ class Conexao
 {
   public:
 	Conexao(int rx, int tx, int bit_seg, int op);
-	void empacotar(float dados); 
-	void iniciar_trans();
 	void iniciar_setup();
+	void empacotar(String dados, int op); 
+	void transmissor_c_conf();
+	void transmissor_s_conf();
+	String aguardar_conf_recep();
 	String iniciar_recep();
 	void  iniciar_grav_arq(String dados);
 	//
