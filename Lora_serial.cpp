@@ -35,12 +35,7 @@ void Conexao::empacotar(String dados, int op )
 	else if (op==2) {
 		_dadosT += "|" + String(dados);
 	}
-	
-
 }
-
-
-
 void Conexao::iniciar_setup()
 {
 	loraSerial = new SoftwareSerial(_rx, _tx);
@@ -54,9 +49,6 @@ void Conexao::transmissor_c_conf()
 	_dadosT = "";
 	delay(2000);
 	this->aguardar_conf_recep();
-
-
-
 }
 
 void Conexao::transmissor_s_conf()
@@ -67,23 +59,26 @@ void Conexao::transmissor_s_conf()
 
 }
 
-String Conexao::aguardar_conf_recep()
+String Conexao::atualizar_nomeDev(int inicio, int fim)
 {
 	String input = "";
+	input = loraSerial->readString();
+//	Serial.println(input);
+	_nomeDev = "";
+	for (inicio; inicio < fim; inicio++) {
+		_nomeDev += String(input.charAt(inicio));
+	}
+	//Serial.println(_nomeDev);
+	//delay(50);
+	return _nomeDev;
+
+}
+
+String Conexao::aguardar_conf_recep()
+{
+
 	if (loraSerial->available() > 0) {
-//		for (int i = 0; i < 20; i++) {
-			Serial.println("LENDO");
-			input = loraSerial->readString();
-			Serial.println(input);
-		
-		
-		
-		_nomeDev = "";
-		//_nomeDev = "n1|ok";
-		//_nomeDev = String(input.charAt(0))+ String(input.charAt(1)) + String(input.charAt(2)) + String(input.charAt(3)) + String(input.charAt(4));
-		for (int i = 0; i < 5; i++) {
-			_nomeDev += String(input.charAt(i));
-		}
+		this->atualizar_nomeDev(0,5);
 		Serial.println(_nomeDev);
 		delay(50);
 		if (_nomeDev == "n1|ok") {
@@ -109,13 +104,9 @@ String Conexao::iniciar_recep()
 	String input = "";
 	
 	if (loraSerial->available() > 0) {
-		input = loraSerial->readString();
-		_nomeDev ="";
-		_nomeDev = String(input.charAt(0)) + String(input.charAt(1));
-		delay(50);
-		Serial.println("Sinal recebido OK!");
-		delay(50);
+		this->atualizar_nomeDev(0, 2);
 		Serial.println(_nomeDev);
+		delay(50);
 		if (_nomeDev == "n1") {
 			this->iniciar_grav_arq(input);
 			this->empacotar("ok", 1);

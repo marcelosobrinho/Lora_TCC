@@ -6,5 +6,7 @@ transmissor_c_conf	KEYWORD2
 iniciar_recep		KEYWORD2
 iniciar_setup		KEYWORD2
 iniciar_grav_arq	KEYWORD2
+extrator_palavras	KEYWORD2
+
 
 
