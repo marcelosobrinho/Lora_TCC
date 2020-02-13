@@ -124,6 +124,7 @@ String Conexao::aguardar_conf_recep()
 		Serial.println("Aguardando");
 		Serial.println(_nomeDev);
 		delay(50);
+/*<<<<<<< HEAD
 		if (_nomeDev == "n1|syn") {
 			_dadosT = "ack";
 			this->transmissor_s_conf();
@@ -141,6 +142,18 @@ String Conexao::aguardar_conf_recep()
 			Serial.print("Pacote rejeitado  - ");
 			Serial.println(_nomeDev);
 			//break;
+=======
+*/
+		if (_nomeDev == "n1|ok") {
+			Serial.println("CONFIRMADO, AGUARDANDO PROXIMO ENVIO EM 5 MINUTOS");
+			delay(5000);
+
+		}
+		else {
+			Serial.println("RETRANSTINDO");
+			delay(50);
+			
+//>>>>>>> 99740b7... VALIDAÇÃO APOS FERIAS  KKKKK
 		}
 		_nomeDev = "";
 		//int temp = random(2000, 12000);
