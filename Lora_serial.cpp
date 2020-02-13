@@ -59,6 +59,44 @@ void Conexao::transmissor_s_conf()
 
 }
 
+void Conexao::detectar_erro(char op)
+{
+	String nome ="mar";
+	String  codif = "";
+	String bin = "";
+	byte  aux=0;
+	for (int i=0; i < nome.length();i++) {
+		bin = String(nome.charAt(i), BIN);
+		if ('0'==bin.charAt(i)) {
+			codif += '0' +bin;
+		}
+		else {
+			codif +=bin;
+		}
+		
+		Serial.println(bin.charAt(i));
+		Serial.println();
+		Serial.println();
+		Serial.println();
+		Serial.println(codif);
+	}
+	
+	//for (int i = 0; i < 1; i++) {
+	//	for (int j = 0; j < 1; j++) {
+	//		codif 
+	//	}
+	//}
+	Serial.println(codif.length());
+	
+	while (true);
+	{
+
+	}
+	//Serial.println(String(01001101));
+	nome = "";
+
+}
+
 String Conexao::atualizar_nomeDev(int inicio, int fim)
 {
 	String input = "";
@@ -89,7 +127,7 @@ String Conexao::aguardar_conf_recep()
 		else {
 			Serial.println("RETRANSTINDO");
 			delay(50);
-			this->transmissor_c_conf();
+			
 		}
 
 		delay(50);
@@ -106,6 +144,7 @@ String Conexao::iniciar_recep()
 	if (loraSerial->available() > 0) {
 		this->atualizar_nomeDev(0, 2);
 		Serial.println(_nomeDev);
+		input = loraSerial->readString();
 		delay(50);
 		if (_nomeDev == "n1") {
 			this->iniciar_grav_arq(input);
@@ -140,7 +179,8 @@ void Conexao::iniciar_grav_arq(String dados)
 	if (arq) {
 
 			Serial.println("Gravado OK");
-			arq.println(dados);
+			Serial.println(dados);
+			arq.println(String(dados));
 			arq.close();
 			delay(50);
 		

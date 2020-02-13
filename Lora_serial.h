@@ -30,6 +30,7 @@ class Conexao
 	void empacotar(String dados, int op); 
 	void transmissor_c_conf();
 	void transmissor_s_conf();
+	void detectar_erro(char op);
 	String atualizar_nomeDev(int inicio, int fim);
 	String aguardar_conf_recep();
 	String iniciar_recep();
