@@ -45,10 +45,13 @@ void Conexao::iniciar_setup()
 
 void Conexao::transmissor_c_conf()
 {
-	loraSerial->println("n1|" + _dadosT);
 	_dadosT = "";
-	delay(2000);
-	this->aguardar_conf_recep();
+	_dadosT = "syn";
+	loraSerial->println("n1|" +_dadosT);
+	Serial.println("Enviado->n1|" + _dadosT);
+	_dadosT = "";
+	//delay(2000);
+	Serial.println(this->aguardar_conf_recep());
 }
 
 void Conexao::transmissor_s_conf()
@@ -114,27 +117,39 @@ String Conexao::atualizar_nomeDev(int inicio, int fim)
 
 String Conexao::aguardar_conf_recep()
 {
-
-	if (loraSerial->available() > 0) {
-		this->atualizar_nomeDev(0,5);
+	Serial.println("Validate");
+	Serial.println(_nomeDev);
+	while (loraSerial->available() > 0) {
+		this->atualizar_nomeDev(0,6);
+		Serial.println("Aguardando");
 		Serial.println(_nomeDev);
 		delay(50);
-		if (_nomeDev == "n1|ok") {
-			Serial.println("CONFIRMADO, AGUARDANDO PROXIMO ENVIO EM 5 MINUTOS");
-			delay(5000);
-
-		}
-		else {
-			Serial.println("RETRANSTINDO");
-			delay(50);
+		if (_nomeDev == "n1|syn") {
+			_dadosT = "ack";
+			this->transmissor_s_conf();
+			_dadosT = "";
+			if (_nomeDev == "n1|syn") {
+				return "V";
+			}
 			
+			
+			
+			//Serial.println("CONFIRMADO, AGUARDANDO PROXIMO ENVIO EM 5 MINUTOS");
+			delay(2000);
+
+		}else {
+			Serial.print("Pacote rejeitado  - ");
+			Serial.println(_nomeDev);
+			//break;
 		}
-
-		delay(50);
-
+		_nomeDev = "";
+		//int temp = random(2000, 12000);
+		//delay(200);
+		//Serial.println("tempo - ");
+		//delay(temp);
 
 	}
-	return "";
+	//return "sair";
 }
 
 String Conexao::iniciar_recep()
@@ -150,6 +165,7 @@ String Conexao::iniciar_recep()
 			this->iniciar_grav_arq(input);
 			this->empacotar("ok", 1);
 			this->transmissor_s_conf();
+			_dadosT = "";
 		}
 		else {
 			Serial.println("Conexão Negada para - > "+_nomeDev);
