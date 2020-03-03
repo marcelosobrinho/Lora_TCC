@@ -25,12 +25,12 @@
 class Conexao
 {
   public:
-	Conexao(int rx, int tx, int bit_seg, int op);
+	Conexao(int rx, int tx, int bit_seg, int op, String _listDev);
 	void iniciar_setup();
 	void empacotar(String dados, int op); 
 	void transmissor_c_conf();
 	void transmissor_s_conf();
-	String atualizar_nomeDev(int inicio, int fim);
+	String atualizar_nomeDev(int inicio, int fim, String dados);
 	String aguardar_conf_recep();
 	String iniciar_recep();
 	void  iniciar_grav_arq(String dados);
@@ -45,6 +45,8 @@ class Conexao
 	int _op;
 	SoftwareSerial *loraSerial;
 	String _nomeDev;
+	String _listDev;
+	String _input;
 	//File *arqLog;
 	     
 };

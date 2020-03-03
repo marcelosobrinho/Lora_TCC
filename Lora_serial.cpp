@@ -18,13 +18,14 @@
  
 
 
-Conexao::Conexao(int rx, int tx, int bit_seg,int op )
+Conexao::Conexao(int rx, int tx, int bit_seg,int op, String listDev	)
  {
 	
 	_tx = tx;
 	_rx = rx;
 	_bit_seg = bit_seg;
 	_op = op;
+	_listDev = listDev;
 
  }
 void Conexao::empacotar(String dados, int op )
@@ -59,14 +60,14 @@ void Conexao::transmissor_s_conf()
 
 }
 
-String Conexao::atualizar_nomeDev(int inicio, int fim)
+String Conexao::atualizar_nomeDev(int inicio, int fim, String dados)
 {
-	String input = "";
-	input = loraSerial->readString();
+//  String input = "";
+//  input = loraSerial->readString();
 //	Serial.println(input);
 	_nomeDev = "";
 	for (inicio; inicio < fim; inicio++) {
-		_nomeDev += String(input.charAt(inicio));
+		_nomeDev += String(dados.charAt(inicio));
 	}
 	//Serial.println(_nomeDev);
 	//delay(50);
@@ -76,9 +77,11 @@ String Conexao::atualizar_nomeDev(int inicio, int fim)
 
 String Conexao::aguardar_conf_recep()
 {
+	String input = "";
 	Serial.println("ate aqui"+_nomeDev);
 	if (loraSerial->available() > 0) {
-		this->atualizar_nomeDev(0,5);
+		input = loraSerial->readString();
+		this->atualizar_nomeDev(0,5,input);
 		Serial.println(_nomeDev);
 		delay(50);
 		if (_nomeDev == "n1|ok") {
@@ -104,8 +107,9 @@ String Conexao::iniciar_recep()
 	String input = "";
 	
 	if (loraSerial->available() > 0) {
-		this->atualizar_nomeDev(0, 2);
-		Serial.println(_nomeDev);
+		input = loraSerial->readString();
+		this->atualizar_nomeDev(0, 2,input);
+		Serial.println(_nomeDev +" -Dado: "+ input);
 		delay(50);
 		if (_nomeDev == "n1") {
 			this->iniciar_grav_arq(input);
